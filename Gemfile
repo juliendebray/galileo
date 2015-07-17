@@ -83,7 +83,7 @@ gem "geocoder"
 gem "gmaps4rails"
 gem "rails-assets-underscore"
 
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 
 # Carousel
