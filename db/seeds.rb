@@ -9,13 +9,13 @@
 # !!!!!!!!_______________W_A_R_N_I_N_G____________________________!!!!!!!!
 # LOCAL USE ONLY -> Generate pictures after import_from_heroku
 # Never push this block uncommented to github or heroku
-ExperiencePicture.all.each do |exp_pic|
+ExperiencePicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |exp_pic|
   exp_pic.update(picture: exp_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
 end
-DestinationPicture.all.each do |dest_pic|
+DestinationPicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |dest_pic|
   dest_pic.update(picture: dest_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
 end
-RecommendedTrip.all.each do |reco_trip|
+RecommendedTrip.where('updated_at < ?', DateTime.new(2015,7,16)).each do |reco_trip|
   reco_trip.update(picture: reco_trip.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/")) unless reco_trip.picture.url.include?('missing')
 end
 # !!!!!!!!_________________________________________________________!!!!!!!!
