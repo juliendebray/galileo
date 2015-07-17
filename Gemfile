@@ -112,5 +112,8 @@ gem 'quiet_assets', group: :development
 # Detect browser-user agent
 gem 'browser'
 
+# Change name of rails app from philae to galileo
+gem 'rename', '~> 1.0.2'
+
 
 
