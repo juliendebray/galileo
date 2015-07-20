@@ -9,9 +9,9 @@
 # !!!!!!!!_______________W_A_R_N_I_N_G____________________________!!!!!!!!
 # LOCAL USE ONLY -> Generate pictures after import_from_heroku
 # Never push this block uncommented to github or heroku
-ExperiencePicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |exp_pic|
-  exp_pic.update(picture: exp_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
-end
+# ExperiencePicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |exp_pic|
+#   exp_pic.update(picture: exp_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
+# end
 DestinationPicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |dest_pic|
   dest_pic.update(picture: dest_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
 end

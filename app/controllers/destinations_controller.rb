@@ -2,7 +2,7 @@ class DestinationsController < ApplicationController
   before_action :set_destination, only: [:show, :must_see]
 
   def index
-    @destination = Destination.all
+    @destinations = Destination.all
   end
 
   def show
