@@ -204,8 +204,10 @@
     color: #FF7519;
   }
 }
-a:hover, small:hover, i:hover {
-  text-decoration: none
+#user-container-fluid {
+  a:hover, small:hover, i:hover {
+    text-decoration: none
+  }
 }
 
 .last-trip:hover {
