@@ -16,6 +16,43 @@
   }
 }
 
+
+
+.panel.panel-info{
+  #owl-experiences {
+    height: 300px;
+  }
+  .owl-controls.clickable {
+    margin: 0px;
+    position: relative;
+    top: -180px;
+    .owl-prev {
+      position: relative;
+      left: -160px;
+    }
+    .owl-next {
+      position: relative;
+      right: -160px;
+    }
+  }
+  .owl-theme .owl-controls .owl-buttons div {
+    font-size: 60px;
+    background: transparent;
+    opacity: 0;
+  }
+  .experience-picture:hover {
+    .owl-buttons div {
+    opacity: 0.5;
+    }
+    .owl-buttons div:hover {
+    opacity: 1;
+    }
+  }
+}
+
+
+
+
 //CSS for experience
 .panel-info {
   .exp-dotdotdot {
