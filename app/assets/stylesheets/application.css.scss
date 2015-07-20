@@ -52,6 +52,7 @@ $font-family-sans-serif: 'Roboto';
 @import "faq";
 @import "plan_my_trip";
 @import "explore_destination";
+@import "destinations_partial";
 
 // General customized styles
 
@@ -67,6 +68,10 @@ html, body {
   border: none;
 }
 
+.small-font-size {
+  font-size: 16px;
+}
+
 .medium-font-size {
   font-size: 18px;
 }
@@ -75,6 +80,9 @@ html, body {
   padding: 0px;
 }
 
+.padding-3 {
+  padding: 3px;
+}
 .no_margin {
   margin: 0px;
 }

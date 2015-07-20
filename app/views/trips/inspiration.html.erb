@@ -1,0 +1,126 @@
+<% content_for :map_css do %>
+<%= stylesheet_link_tag 'map_demo' %>
+<% end %>
+<div class="wrapper">
+  <!-- Map -->
+  <div class="map-container hidden-xs">
+    <div class="overlay">
+      <div class="overlay-loading">
+        Loading
+        <b>.</b>
+        <b>.</b>
+        <b>.</b>
+      </div>
+    </div>
+    <div id="map">
+    </div>
+    <div id='map-interaction'>
+      <fieldset id="search-bar">
+        <i class="fa fa-search"></i>
+        <%= search_field_tag('pac-input', nil, placeholder: 'Chercher un lieu en particulier') %>
+      </fieldset>
+    </div>
+    <div id="map-legend" class="display-inline">
+      <%= image_tag 'http://philae-floju.s3.amazonaws.com/markers/top_must_see.png'%> Les incontournables
+      <%= image_tag 'http://philae-floju.s3.amazonaws.com/markers/top_2.png'%> Toutes les expériences
+      <%= image_tag 'https://philae-floju.s3.amazonaws.com/markers/airport_logo.png'%> Principal point d'arrivée
+    </div>
+  </div>
+  <!--   Sidebar -->
+  <div class="sidebar" role="tabpanel">
+    <div class="selection-header text-center">
+      <div class="selection-title text-center">
+        <span id="sidebar-title-content">
+          <!-- Nav tabs -->
+        </span>
+      </div>
+    </div>
+    <div class="selection-content tab-content">
+    <!-- Nav content -->
+    <div role="tabpanel" class="tab-pane active" id="top-from-explorizers">
+  <div id="tab-pane-introduction">
+    <p>
+      Sélection des meilleures attractions <b>triées par note</b>.
+      <br>
+    </p>
+      <div class="filters-block text-center">
+        <div>
+          <a id="must" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+            <i class="fa fa-star"></i>
+            <span class="hidden-xs">Incontournables</span>
+          </a>
+        </div>
+        <div>
+          <a id="otbt" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+            <i class="fa fa-compass"></i>
+            <span class="hidden-xs">Hors des sentiers battus</span>
+          </a>
+        </div>
+        <div>
+          <a id="relax" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+            <i class="fa fa-glass"></i>
+            <span class="hidden-xs">Détente</span>
+          </a>
+        </div>
+        <div>
+          <a id="culture" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+            <i class="fa fa-university"></i>
+            <span class="hidden-xs">Culture</span>
+          </a>
+        </div>
+        <div>
+          <a id="sport" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+            <i class="fa fa-bicycle"></i>
+            <span class="hidden-xs">Sport</span>
+          </a>
+        </div>
+      </div>
+  </div>
+  <ul id="draggablePanelList" class="list-unstyled experience-block-container top-from-explorizers">
+  </ul>
+</div>
+
+  </div>
+  </div>
+</div>
+
+
+
+<%= content_for(:before_js) do %>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;key=AIzaSyCf77HD5LQkLbAcZWkBXKj-DLkXQJ9vHEc" %>
+  <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"%>
+  <%= javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js" %>
+  <script>
+    // Use of a global variable to know if the user is authentificated or guest
+    var GUEST_USER = <%= @guest_user ? 'true' : 'false' %>;
+  </script>
+<% end %>
+<% content_for :map_js do %>
+  <% javascript_include_tag 'map_demo' %>
+<% end %>
+<% content_for(:after_js) do %>
+  <script>
+    $(document).on('ready', function() {
+        var userMapOptions = {
+          center: new google.maps.LatLng(<%= @trip.latitude %>, <%= @trip.longitude %>),
+          zoom: 6,
+          disableDoubleClickZoom: false,
+          scaleControl: true,
+          disableDefaultUI: true,
+          zoomControl: true,
+          zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL
+          }
+        };
+
+        var bounds = '';
+        <% if @trip.viewport_set? %>
+          bounds = new google.maps.LatLngBounds( new google.maps.LatLng(<%= @trip.vp_sw_lat %>,<%= @trip.vp_sw_lng %>), new google.maps.LatLng(<%= @trip.vp_ne_lat %>,<%= @trip.vp_ne_lng %>))
+        <% end %>
+        buildMapForUser(userMapOptions, <%= @trip.id %>, bounds);
+        makeTableRowlinkActionnable();
+        placeHelpButton();
+        initializeFilterButtons(<%= @trip.id %>, true);
+    });
+  </script>
+<% end %>

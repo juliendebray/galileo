@@ -191,6 +191,17 @@ class TripsController < ApplicationController
     end
   end
 
+  def inspiration
+    @trip = Trip.find(params[:id])
+    @guest_user = false
+    @trip_exp_tab = @trip.trip_experiences.sort_by do |te|
+      te.order
+    end
+    if browser.mobile? || browser.tablet?
+      redirect_to trip_path(@trip)
+    end
+  end
+
   def summarize
     # set_orders_if_nil!(@trip.trip_experiences)
     @trip_exp_ordered = @trip.trip_experiences.sort_by do |te|

@@ -1,8 +1,8 @@
 class RecommendedTripsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_trip
-  before_action :set_recommended_trip
-  respond_to :js
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_trip, except: [:show]
+  before_action :set_recommended_trip, except: [:show]
+  respond_to :js, except: [:show]
 
   def add_to_trip
     order = @trip.trip_experiences.count + 1
@@ -13,6 +13,10 @@ class RecommendedTripsController < ApplicationController
 
   def remove_from_trip
     @trip.trip_experiences.where(recommended_trip_id: @recommended_trip.id).delete_all
+  end
+
+  def show
+    @recommended_trip = RecommendedTrip.find(params[:id])
   end
 
   private

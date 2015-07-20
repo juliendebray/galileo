@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
     resources :providers, only: [:index, :show]
 
+    resources :recommended_trips, only: [:show]
+
     # resources :experiences, except: [:index]  do
     resources :experiences do
       resources :experience_reviews, only: [:new, :create]
@@ -53,6 +55,7 @@ Rails.application.routes.draw do
         get :explore_destination
         get :start
         get :plan_my_trip
+        get :inspiration
         get :demo
         get :providers
         get :summarize
