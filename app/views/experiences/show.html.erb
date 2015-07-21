@@ -9,7 +9,6 @@
   <div class="container-fluid" id="exp-page-container-fluid">
     <div class="experience-page">
       <div id="carousel-exp-page" class="carousel slide">
-  <!--       Ajouter data-ride="carousel" dans la div pour un défilement auto -->
         <ol class="carousel-indicators">
           <li data-target="#carousel-exp-page" data-slide-to="0" class="active"></li>
           <% if @experience.experience_pictures.second %>
@@ -23,23 +22,10 @@
           <% end %>
         </ol>
         <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <%= image_tag @experience.experience_pictures.first.picture.url(:banner) %>
+          <% @experience.experience_pictures.each_with_index do |experience_picture, index| %>
+            <div class="item <%= 'active' if index == 0 %>" >
+            <%= image_tag experience_picture.picture.url(:banner) %>
           </div>
-          <% if @experience.experience_pictures.second %>
-            <div class="item">
-              <%= image_tag @experience.experience_pictures.second.picture.url(:banner) %>
-            </div>
-          <% end %>
-          <% if @experience.experience_pictures.third %>
-            <div class="item">
-              <%= image_tag @experience.experience_pictures.third.picture.url(:banner) %>
-            </div>
-          <% end %>
-          <% if @experience.experience_pictures.fourth %>
-            <div class="item">
-              <%= image_tag @experience.experience_pictures.fourth.picture.url(:banner) %>
-            </div>
           <% end %>
         </div>
         <a class="left carousel-control" href="#carousel-exp-page" role="button" data-slide="prev">
@@ -55,6 +41,7 @@
         </div>
       </div>
       <div class="vertical-spacer-xs"></div>
+      <h4 class="text-center">A propos de cette attraction</h4>
       <div class="row text-center">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
           <p><%= simple_format @experience.description %></p>
@@ -83,10 +70,6 @@
           <% if @experience.unesco %>
             <div class="vertical-spacer-xs"></div>
             <p>Classé au <a href="http://whc.unesco.org/fr/list/" target="_blank">Patrimoine mondial de l'UNESCO</a></p>
-          <% end %>
-          <% if @experience.thousand_places %>
-            <div class="vertical-spacer-xs"></div>
-            <p>Figure sur la Liste des <a href="http://1000places.com/" target="_blank">1 000 lieux à voir dans sa vie</a></p>
           <% end %>
         </div>
       </div>
@@ -182,7 +165,7 @@
           </div>
           <div id="exp_review_block">
             <div class="row text-center">
-              <h4>L'avis des voyageurs</i></h4>
+              <h4>L'avis des voyageurs</h4>
             </div>
             <div class="vertical-spacer-xxs"></div>
             <div class="row text-center">
@@ -193,7 +176,12 @@
             </div>
             <div class="vertical-spacer-xs"></div>
             <div class="row text-center">
-              <p>Note moyenne: <b><%= @experience.average_rating %></b>/10</p>
+              <p>
+                Note moyenne : <b><%= @experience.average_rating %></b>/10
+                <% if @experience.ta_votes %>
+                  <em> (<%=@experience.ta_votes%> votes) </em>
+                <% end %>
+              </p>
             </div>
             <% if @experience.experience_reviews.any? %>
               <div class="vertical-spacer-xs"></div>
@@ -203,20 +191,11 @@
                   <footer><cite title="Source Title"><%= "#{experience_review.name} le #{experience_review.created_at.strftime("%d/%m/%y")} (note: #{experience_review.rating} / 10)" %></cite></footer>
                 </blockquote>
               <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-          <div id="exp_review_block" class="text-center">
-            <h5>Donnez votre avis</h5>
-            <%= bootstrap_form_for([@experience, ExperienceReview.new], layout: :inline) do |f| %>
-              <%= f.text_field :comment, hide_label: true, placeholder: "Donnez votre avis en 140 caractères max !", required: true, size: 65, maxlength: 140 %>
-              <%= f.text_field :name, hide_label: true, placeholder: "Nom", required: true %>
-              <%= f.number_field :rating, hide_label: true, placeholder: "Note entre 0 et 10", required: true, min: 0, max: 10 %>
-              <%= f.hidden_field(:created_at) %>
-              <%= f.submit( t('expbuttonadd'), class: "btn btn-info") %>
+              <% if @experience.ta_url %>
+                <%= link_to @experience.ta_url, target:'_blank' do %>
+                  <h5 class="text-center">Voir plus de commentaires </h5>
+                <% end %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -227,10 +206,19 @@
           </div>
         </div>
       </div>
-      <% if @experience.destination %>
+      <h4 class="text-center">Localisation de l'attraction</h4>
+      <div id="attraction-map">
+      </div>
+      <% if @near_experiences.any? %>
         <div class="row text-center">
-          <h4><%= @experience.destination.name.capitalize %> - Voir les autres expériences</h4>
-          <% Experience.where(destination: @experience.destination, published:true, landing_point:false).each do |experience| %>
+          <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+            <div id="block-separator"></div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <h4>Voir les attractions à proximité</h4>
+          <div class="row">
+          <% @near_experiences.each do |experience| %>
             <div class="col-xs-12 col-sm-6 col-md-4">
               <div class="experience-box">
                 <%= link_to experience_path(experience.id), target: "_blank" do %>
@@ -247,7 +235,8 @@
                 <% end %>
               </div>
             </div>
-          <% end %>
+
+        <% end %>
         </div>
         <br>
         <div class="row text-center">
@@ -255,17 +244,50 @@
             <div id="block-separator"></div>
           </div>
         </div>
-        <div class="row text-center">
-          <br>
-          <%= link_to "Voir la destination - #{@experience.destination.name.capitalize}", destination_path(@experience.destination.id), {class: "btn btn-info"} %>
-        </div>
       <% else %>
         <div class="row text-center">
           <%= link_to "Voir d'autres expériences", experiences_path, {class: "btn btn-info"} %>
         </div>
       <% end %>
+       <div class="row text-center">
+          <br>
+          <% if @experience.destination %>
+            <%= link_to "Voir la destination - #{@experience.destination.name.capitalize}", destination_path(@experience.destination.id), {class: "btn btn-info"} %>
+            <% end %>
+        </div>
       <div class="vertical-spacer-sm"></div>
     </div>
   </div>
 </div>
 <%= render partial: 'shared/footer' %>
+<%= content_for(:before_js) do %>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;key=AIzaSyCf77HD5LQkLbAcZWkBXKj-DLkXQJ9vHEc" %>
+  <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"%>
+<% end %>
+<% content_for(:after_js) do %>
+  <script>
+    $(document).on('ready', function() {
+        var mapOptionsAttraction = {
+          center: new google.maps.LatLng(<%= @experience.latitude %>, <%= @experience.longitude %>),
+          zoom: 10,
+          scrollwheel: false,
+          scaleControl: true,
+          panControl: false,
+          disableDefaultUI: false,
+          zoomControl: true,
+          zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL
+          }
+        };
+        handler = Gmaps.build('Google');
+        handler.buildMap({ provider: mapOptionsAttraction, internal: { id: 'attraction-map' } }, function(){
+          markers = handler.addMarkers([
+              { "lat": <%= @experience.latitude %>, "lng": <%= @experience.longitude %>, "infowindow": "<%= @experience.name %>", "title": "Localisation de l'attraction" },
+            ]);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+         handler.getMap().setZoom(10);
+        });
+      });
+  </script>
+<% end %>
