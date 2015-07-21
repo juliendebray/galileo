@@ -805,8 +805,9 @@ function setMarkersAccordingToApi(url, trip_id, className, callback) {
 }
 
 function commonInitialization(data, className) {
-  setSideBar(data, className);
-  ellipseExperienceBlock();
+  setExperienceBlock(data);
+  // setSideBar(data, className);
+  // ellipseExperienceBlock();
   setExperienceInfowindow(data);
   setAnimationOnMarkers();
 }
@@ -829,6 +830,14 @@ function setSideBar(data, className) {
   for (var i = 0; i < data.length; i++) {
     $('.experience-block-container' + className).append(data[i].experience_block);
   }
+}
+
+function setExperienceBlock(data) {
+  $('.experience-block-container li').remove();
+  for (var i = 0; i < data.length; i++) {
+    $('.experience-block-container').append(data[i].experience_block);
+  }
+  setCarrousel();
 }
 
 function buildUrlWithBoundsByPopularity(map, trip_id) {
