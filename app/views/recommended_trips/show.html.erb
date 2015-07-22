@@ -1,6 +1,192 @@
-<h1>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure distinctio neque assumenda voluptatum molestias. Quae veritatis placeat, ab natus cum porro nulla. Dolore amet reiciendis aut voluptatum illo dolorem, nisi?
-</h1>
-<h2>
-  Show#recommended_trip
-</h2>
+<div class="under-navbar">
+  <div class="container-fluid">
+    <h1 class="text-center medium-article-title">
+      <%="Itinéraire #{@recommended_trip.destination.name}" %>
+      <br>
+       <%= "#{@recommended_trip.title}"  %>
+    </h1>
+    <div class="row">
+      <div id="recommended-trip-map">
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+        <div id="block-separator"></div>
+      </div>
+    </div>
+    <h2 class='text-center'>A propos de cet itinéraire</h2>
+    <div class="row text-center">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <p class="medium-style">
+          <%= raw @recommended_trip.description %>
+        </p>
+        <% if @recommended_trip.duration %>
+          <p class="medium-style">
+            <b>Durée conseillée : <%= raw @recommended_trip.duration %></b>
+          </p>
+        <% end %>
+      </div>
+    </div>
+     <% if @recommended_trip.good_points && @recommended_trip.rythm %>
+      <div class="row text-center">
+        <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+          <div id="block-separator"></div>
+        </div>
+      </div>
+      <h2 class='text-center'>En bref</h2>
+      <div class="row text-center">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <p class="medium-style">
+            <em>Pourquoi le faire ?</em><br>
+            <%= raw @recommended_trip.good_points %>
+          </p>
+          <p class="medium-style">
+            <em>A quel rythme ?</em><br>
+            <%= raw @recommended_trip.rythm %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row text-center">
+    <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+      <div id="block-separator"></div>
+    </div>
+  </div>
+  <h2 class='text-center'>Les étapes en détail</h2>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-md-9 col-md-offset-1">
+      <ul class="list-unstyled">
+        <li><p class="medium-style"><%= raw(@recommended_trip.step_1) %></p></li>
+        <li><p class="medium-style"><%= raw(@recommended_trip.step_2) %></p></li>
+        <% if @recommended_trip.step_3.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_3 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_4.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_4 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_5.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_5 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_6.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_6 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_7.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_7 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_8.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_8 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_9.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_9 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_10.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_10 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_11.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_11 %></p></li>
+        <% end %>
+         <% if @recommended_trip.step_12.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_12 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_13.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_13 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_14.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_14 %></p></li>
+        <% end %>
+        <% if @recommended_trip.step_15.length > 0 %>
+          <li><p class="medium-style"><%= raw @recommended_trip.step_15 %></p></li>
+        <% end %>
+      </ul>
+      <br>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+      <div id="block-separator"></div>
+    </div>
+  </div>
+  <h2 class='text-center'>Les <%= @recommended_trip.recommended_trip_experiences.count %> attractions incluses dans cet itinéraire</h2>
+  <br>
+  <div class="row destination-content">
+  <% @recommended_trip.recommended_trip_experiences.sort_by {|rte| rte.order }.each do |rte| %>
+
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="experience-big-box">
+          <%= link_to experience_path(rte.experience.id), target: "_blank", onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{rte.experience.name} from explore_destination');" do %>
+            <div class="experience-picture text-center">
+              <% if rte.experience.experience_pictures.first %>
+                <%= image_tag rte.experience.experience_pictures.first.picture.url(:medium), class: "img-responsive" %>
+              <% end %>
+            </div>
+            <div class="experience-name text-center">
+              <small><%= rte.experience.name %></small><br>
+            </div>
+            <div class="experience-one-sentence text-center">
+              <small><%= rte.experience.onesentence %></small>
+            </div>
+            <div class="other-experience-category text-center">
+              <% if rte.experience.category_tab.include?('otbt') %>
+                <div class="experience-category-otbt text-center">
+                  <p><i class="fa fa-compass"></i>Hors des sentiers battus</p>
+                </div>
+              <% end %>
+              <% if rte.experience.category_tab.include?('nature') %>
+                <div class="experience-category-nature text-center">
+                  <p><i class="fa fa-tree"></i>Nature</p>
+                </div>
+              <% end %>
+              <% if rte.experience.category_tab.include?('culture') %>
+                <div class="experience-category-culture text-center">
+                  <p><i class="fa fa-university"></i>Villes et culture</p>
+                </div>
+              <% end %>
+              <% if rte.experience.category_tab.include?('sport') %>
+                <div class="experience-category-sport text-center">
+                  <p><i class="fa fa-bicycle"></i>Sport</p>
+                </div>
+              <% end %>
+              <% if rte.experience.category_tab.include?('relax') %>
+                <div class="experience-category-relax text-center">
+                  <p><i class="fa fa-sun-o"></i>Détente</p>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+  </div>
+<%= render 'shared/footer' %>
+<%= content_for(:before_js) do %>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;key=AIzaSyCf77HD5LQkLbAcZWkBXKj-DLkXQJ9vHEc" %>
+  <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"%>
+<% end %>
+<% content_for(:after_js) do %>
+  <script>
+    $(document).on('ready', function() {
+        var mapOptionsAttraction = {
+          scrollwheel: false,
+          scaleControl: true,
+          panControl: false,
+          disableDefaultUI: false,
+          zoomControl: true,
+          zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL
+          }
+        };
+        handler = Gmaps.build('Google', { markers: { clusterer: undefined } });
+        handler.buildMap({ provider: mapOptionsAttraction, internal: { id: 'recommended-trip-map' } }, function(){
+          markers = handler.addMarkers([
+            <% @recommended_trip.recommended_trip_experiences.each do |recommended_trip_experience| %>
+              { "lat": <%= recommended_trip_experience.experience.latitude %>, "lng": <%= recommended_trip_experience.experience.longitude %>, "infowindow": "<%= recommended_trip_experience.experience.name %>", "title": "Etape n°<%= recommended_trip_experience.order %>" },
+            <% end %>
+            ]);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        });
+      });
+  </script>
+<% end %>

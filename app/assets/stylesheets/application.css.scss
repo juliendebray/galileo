@@ -53,11 +53,17 @@ $font-family-sans-serif: 'Roboto';
 @import "plan_my_trip";
 @import "explore_destination";
 @import "destinations_partial";
+@import "recommended_trips";
 
 // General customized styles
 
 html, body {
   height: 100%;
+}
+
+
+.under-navbar {
+  margin-top: 55px;
 }
 
 .text-right {
