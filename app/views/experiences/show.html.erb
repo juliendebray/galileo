@@ -44,24 +44,53 @@
       <h4 class="text-center">A propos de cette attraction</h4>
       <div class="row text-center">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <% if @experience.onesentence %>
+            <br>
+            <em class="font-size-23">" <%= @experience.onesentence %> "</em>
+            <br>
+          <% end %>
           <p><%= simple_format @experience.description %></p>
         </div>
       </div>
       <div class="experience-details">
         <div class="row text-center">
-          <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-            <% if @experience.timetospent.length > 0 %>
-            <br>
-              <i class="fa fa-clock-o"></i> - <b>Temps de visite</b> :  <p><%= @experience.timetospent %></p>
-            <% end %>
-            <br>
-            <% if @experience.wheretosleep.length > 0 %>
-              <i class="fa fa-home"></i> - <b>Où dormir</b> :  <p><%= @experience.wheretosleep %></p>
-            <% end %>
-            <% if @experience.transportation.length > 0 %>
-            <br>
-              <i class="fa fa-bicycle"></i> - <b>Comment s'y rendre</b> : <p><%= simple_format @experience.transportation %></p>
-            <% end %>
+                <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+                  <div id="block-separator">
+                  </div>
+                </div>
+              </div>
+              <h4 class='text-center'>En bref</h4>
+              <div class="vertical-spacer-xs"></div>
+        <div class="container">
+          <div class="row text-center">
+
+              <% if @experience.good_points%>
+                <div class="col-xs-6">
+                  <br>
+                  <i class="fa fa-thumbs-o-up"></i><b>&nbsp Ce qu'on aime</b> :  <p><%= @experience.good_points %></p>
+                </div>
+              <% end %>
+              <% if @experience.bad_points%>
+                <div class="col-xs-6">
+                  <br>
+                  <i class="fa fa-thumbs-o-down"></i><b>&nbsp Ce qu'on aime moins</b> :  <p><%= @experience.bad_points %></p>
+                </div>
+              <% end %>
+              <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <% if @experience.timetospent.length > 0 %>
+                  <br>
+                  <br>
+                    <i class="fa fa-clock-o"></i><b>&nbsp Temps de visite conseillé</b> :  <p><%= @experience.timetospent %></p>
+                <% end %>
+                <% if @experience.wheretosleep.length > 0 %>
+                    <br>
+                    <i class="fa fa-home"></i><b>&nbsp Où dormir</b> :  <p><%= @experience.wheretosleep %></p>
+                <% end %>
+                <% if @experience.transportation.length > 0 %>
+                    <br>
+                    <i class="fa fa-bicycle"></i><b>&nbsp Comment s'y rendre</b> : <p><%= @experience.transportation %></p>
+                <% end %>
+              </div>
           </div>
         </div>
       </div>
