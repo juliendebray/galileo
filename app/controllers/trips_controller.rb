@@ -6,12 +6,12 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.title = @trip.query
+    @trip.save
     @destination = Destination.find_by(country_code: @trip.country_code)
     if @destination && @trip.country_code
       redirect_to destination_path(@destination)
     else
-      @trip.title = @trip.query
-      @trip.save
       redirect_to inspiration_trip_path(@trip)
     end
   end

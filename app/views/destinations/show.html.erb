@@ -278,8 +278,8 @@
         </div>
         <br>
         <div class="row text-center">
-          <%= link_to experiences_path do %>
-            <h3>Voir toutes les attractions <i class="fa fa-angle-right"></i></h3><br>
+          <%= link_to inspiration_trip_path(Trip.where(country_code: @destination.country_code).last), target: '_blank' do %>
+            <h3>Consulter l'ensemble des activités à faire sur place <i class="fa fa-angle-right"></i></h3><br>
           <% end %>
         </div>
       </div>
