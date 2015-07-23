@@ -4,188 +4,28 @@
 <% content_for :logo_hp do %>
   <%= true %>
 <% end %>
-<% content_for :registration_scripts do %>
-  <% if flash[:notice] && user_signed_in? %>
-    <% if session[:from]  %>
-      <% current_user.update(from_campaign: session[:from]) if current_user.from_campaign.nil?   %>
-    <% end %>
-    <!-- Facebook Conversion Code for Registration -->
-    <script>(function() {
-      var _fbq = window._fbq || (window._fbq = []);
-      if (!_fbq.loaded) {
-        var fbds = document.createElement('script');
-        fbds.async = true;
-        fbds.src = '//connect.facebook.net/en_US/fbds.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(fbds, s);
-        _fbq.loaded = true;
-      }
-    })();
-    window._fbq = window._fbq || [];
-    window._fbq.push(['track', '6026156032989', {'value':'0.00','currency':'EUR'}]);
-    </script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6026156032989&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
-  <% end %>
-<% end %>
 <div class="homepage_story">
   <div class="fullpage">
     <div id="homeblock" class="banner text-center">
       <div class="title fader">
         <h1><%= t('.title') %></h1>
-        <h3><%= t('.subtitle') %></h3>
+        <h3>Dites-nous où vous allez. On vous dit que faire sur place !</h3>
       </div>
       <div class="vertical-spacer-xxs"></div>
       <div class="tr-grey-bg">
-        <% if session[:from] == 'fb_planning' %>
-          <h4>
-            <i>Les destinations préférées des Explorizers</i>
-          </h4>
-          <div class="container">
-            <div class="row text-center">
-              <div class="col-xs-12 col-sm-4">
-                <div class="destination-box">
-                  <% if user_signed_in? %>
-                    <%= link_to explore_destination_trip_path(current_user.trips.create(query: Destination.find(10).name, title: Destination.find(10).name)) do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(10).destination_pictures.third.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(10).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Planifiez mon voyage</small><br>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <%= link_to '#', onclick:"showSignUpModal(); ga('send', 'event', 'User', 'Thailand', 'Thailand link clicked from hp without being signed in');"  do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(10).destination_pictures.first.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(10).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Inscrivez-vous pour commencer</small><br>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-4">
-                <div class="destination-box">
-                  <% if user_signed_in? %>
-                    <%= link_to explore_destination_trip_path(current_user.trips.create(query: Destination.find(8).name, title: Destination.find(8).name)) do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(8).destination_pictures.first.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(8).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Planifiez mon voyage</small><br>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <%= link_to '#', onclick:"showSignUpModal(); ga('send', 'event', 'User', 'Brazil', 'Brazil link clicked from hp without being signed in');"  do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(8).destination_pictures.first.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(8).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Inscrivez-vous pour commencer</small><br>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-4">
-                <div class="destination-box">
-                  <% if user_signed_in? %>
-                    <%= link_to explore_destination_trip_path(current_user.trips.create(query: Destination.find(9).name, title: Destination.find(9).name)) do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(9).destination_pictures.first.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(9).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Planifiez mon voyage</small><br>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <%= link_to '#', onclick:"showSignUpModal(); ga('send', 'event', 'User', 'Mexico', 'Mexico link clicked from hp without being signed in');"  do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(9).destination_pictures.first.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(9).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Inscrivez-vous pour commencer</small><br>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
+        <%= form_for(Trip.new, html: { class: "form-inline" }) do |f| %>
+          <div class="form-group minor-block" class="text-center">
+            <%= f.hidden_field(:latitude, class: 'trip_params') %>
+            <%= f.hidden_field(:longitude, class: 'trip_params') %>
+            <%= f.hidden_field(:vp_ne_lat, class: 'trip_params') %>
+            <%= f.hidden_field(:vp_ne_lng, class: 'trip_params') %>
+            <%= f.hidden_field(:vp_sw_lat, class: 'trip_params') %>
+            <%= f.hidden_field(:vp_sw_lng, class: 'trip_params') %>
+            <%= f.hidden_field(:country_code, class: 'trip_params') %>
+            <%= f.search_field(:query, placeholder: t('.searchplaceholder'), required: true ) %>
+            <%= f.submit( 'Rechercher', class: 'btn btn-info btn-sm', onclick:"ga('send', 'event', 'User', 'Search Button', 'Click on search button from hp');") %>
           </div>
-        <% elsif session[:from] == 'gg_thailand' %>
-          <div class="container">
-            <div class="row text-center">
-              <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                <div class="destination-box">
-                  <% if user_signed_in? %>
-                    <%= link_to explore_destination_trip_path(current_user.trips.create(query: Destination.find(10).name, title: Destination.find(10).name)) do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(10).destination_pictures.third.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(10).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Planifiez mon voyage</small><br>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <%= link_to '#', onclick:"showSignUpModal(); ga('send', 'event', 'User', 'Thailand', 'Thailand link clicked from hp without being signed in');"  do %>
-                      <div class="destination-picture text-center">
-                        <%= image_tag Destination.find(10).destination_pictures.first.picture.url(:medium), class: "img-responsive" %>
-                      </div>
-                      <div class="destination-name text-center">
-                        <small><%= Destination.find(10).name.capitalize %></small><br>
-                      </div>
-                      <div class="destination-subname text-center">
-                        <small>Inscrivez-vous pour commencer</small><br>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <% if user_signed_in? %>
-            <%= form_for(Trip.new, html: { class: "form-inline" }) do |f| %>
-              <div class="form-group minor-block" class="text-center">
-                <%= f.hidden_field(:latitude, class: 'trip_params') %>
-                <%= f.hidden_field(:longitude, class: 'trip_params') %>
-                <%= f.hidden_field(:vp_ne_lat, class: 'trip_params') %>
-                <%= f.hidden_field(:vp_ne_lng, class: 'trip_params') %>
-                <%= f.hidden_field(:vp_sw_lat, class: 'trip_params') %>
-                <%= f.hidden_field(:vp_sw_lng, class: 'trip_params') %>
-                <%= f.hidden_field(:country_code, class: 'trip_params') %>
-                <%= f.search_field(:query, placeholder: t('.searchplaceholder'), required: true ) %>
-                <%= f.submit( t('.searchbutton'), class: 'btn btn-info btn-sm', onclick:"ga('send', 'event', 'User', 'Search Button', 'Click on search button from hp');") %>
-              </div>
-            <% end %>
-          <% else %>
-            <h3><%= link_to t('.signup'),'#',  {class: "btn btn-info btn-lg fader", onclick:"showSignUpModal(); ga('send', 'event', 'User', 'Sign Up Button', 'Click on sign up button from hp');"}%></h3>
-          <% end %>
         <% end %>
-      </div>
-      <div id="go-to-faq" class='hidden-xs'>
-        <%= link_to t('about'), faq_index_path, target: "_blank" %><br>
       </div>
       <div id="arrow-down">
         <i class="fa fa-angle-down fader"></i>
@@ -193,85 +33,6 @@
     </div>
   </div>
   <div class="help hp-section">
-    <div class="vertical-spacer-xs"></div>
-    <h2 class="text-center"><%= t('.howitworks') %></h2>
-    <p class='text-center container'><%= t('.description') %></p>
-    <div class="vertical-spacer-sm"></div>
-    <div class="vertical-spacer-xs"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-3 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-info-circle"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <p>1. Lisez les <b>infos</b> à savoir avant de partir</p>
-          </div>
-          <div class="vertical-spacer"></div>
-        </div>
-        <div class="col-sm-12 col-md-3 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-camera-retro"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <p>2. Découvrez les <b>expériences</b> à destination</p>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-        </div>
-        <div class="col-sm-12 col-md-3 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-bicycle"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <p>3. Créez votre <b>itinéraire</b> personnel</p>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-        </div>
-        <div class="col-sm-12 col-md-3 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-suitcase"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <p>4. Imprimez ou emportez votre <b>parcours</b> complet</p>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-        </div>
-        <!-- <div class="col-sm-12 col-md-4 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-map-marker"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <%= t('.item_one') %>
-          </div>
-          <div class="vertical-spacer"></div>
-        </div>
-        <div class="col-sm-12 col-md-4 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-comment"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <%= t('.item_two') %>
-          </div>
-          <div class="vertical-spacer"></div>
-        </div>
-        <div class="col-sm-12 col-md-4 text-center text-contrast">
-          <div class="how-header">
-            <i class="fa fa-cloud-download"></i>
-          </div>
-          <div class="vertical-spacer-xs"></div>
-          <div class="how-content">
-            <%= t('.item_three') %>
-          </div>
-          <div class="vertical-spacer"></div>
-        </div> -->
-      </div>
-    </div>
       <div class="logo-container container">
           <div class="row text-center">
             <p><i>powered by</i></p>
@@ -359,9 +120,6 @@
             </div>
           </div>
           <div class="vertical-spacer-xs"></div>
-          <div class="row text-center">
-            <%= link_to t('.other_experiences'), experiences_path, {class: "btn btn-info"} %>
-          </div>
         </div>
 
         <div class="vertical-spacer"></div>
