@@ -15,6 +15,9 @@
         <a href="#recommended-trip" onclick="ga('send', 'event', 'User', 'Itinerary Menu', 'User clicked on itinerary from destination navbar menu');">Les itinéraires</a>
       </li>
       <li>
+        <a href="#accomodations" onclick="ga('send', 'event', 'User', 'My Trip Menu', 'User clicked on my trip from destination navbar menu');">Logements</a>
+      </li>
+      <li>
         <a href="#my-trip" onclick="ga('send', 'event', 'User', 'My Trip Menu', 'User clicked on my trip from destination navbar menu');">Plus de destinations</a>
       </li>
     </ul>
@@ -335,23 +338,8 @@
                                 </div>
                               </a>
                             </div>
-                            <!-- <div class="col-xs-12 col-sm-3">
-                              <div class="customize-trip-btn">
-                              </div>
-                            </div> -->
                           </div>
                         <% end %>
-                        <!-- <div class="row">
-                          <div class="col-xs-12 col-sm-10 col-md-10 col-md-offset-1">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index+1 %>">
-                              <div class="row text-center">
-                                <div class="see-rec-trip-detail">
-                                  <p>Voir le détail   <i class="fa fa-angle-right"></i></p>
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                        </div> -->
                       </h4>
                     </div>
                     <div id="collapse<%= index+1 %>" class="panel-collapse collapse">
@@ -397,9 +385,35 @@
       <div id="block-separator"></div>
     </div>
   </div>
+  <div class="vertical-spacer" id="accomodations"> </div>
+  <div>
+    <h4 class='text-center map-title'>Consultez les logements sur place</h4>
+    <br>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+        <div class="vertical-spacer-sm"></div>
+        <div class="accomodations-booking text-center">
+          <div class="vertical-spacer-xs"></div>
+          <strong class="font-size-23">Meilleurs prix garantis. Annulation facile.</strong>
+          <div class="vertical-spacer-xs"></div>
+          <a href='<%="http://www.booking.com/country/#{@destination.country_code.downcase}.fr.html?aid=845697" %>' target='_blank' class="btn btn-info">Consultez les logements</a>
+          <div class="vertical-spacer-xs"></div>
+          <div><em>powered by</em></div>
+          <div class="vertical-spacer-xxs"></div>
+          <%= image_tag 'booking_logo.png' %>
+          <div class="vertical-spacer-xxs"></div>
+        </div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5">
+      <div id="block-separator"></div>
+    </div>
+  </div>
   <div class="vertical-spacer" id="my-trip"> </div>
   <div>
-    <h4 class='text-center map-title'>Découvrez d'autres destinations</h4>
+    <h4 class='text-center map-title'>Découvrez nos autres destinations</h4>
     <br>
     <%= render partial: 'shared/destinations', locals: {destinations: Destination.all} %>
   </div>
