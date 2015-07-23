@@ -3,9 +3,9 @@
   <head>
 <!--   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# explorizers: http://ogp.me/ns/fb/explorizers#"> -->
     <title>
-      <%= yield_with_default(:title, "Explorizers | Le voyage inspiré et partagé") %>
+      <%= yield_with_default(:title, "Explorizers | Planifiez votre voyage sans prise de tête") %>
     </title>
-    <meta name="description" content="<%= yield_with_default(:description,"Avec Explorizers, simplifie la préparation de ton voyage, avec les conseils de tes amis, d'autres voyageurs et de professionnels.")%>" >
+    <meta name="description" content="<%= yield_with_default(:description,"Découvrez simplement les meilleures activités à faire et les plus beaux lieux à voir pour votre prochaine destination")%>" >
     <meta name="p:domain_verify" content="852a947bbf6d9d4c38ef54cf6ff7422b"/>
     <% if @trip %>
       <meta property="og:title" content="Vos conseils pour mon voyage" />
@@ -50,17 +50,6 @@
     <%= yield :registration_scripts %>
   </head>
   <body>
-    <!-- Qualaroo for explorizers.com -->
-    <!-- Paste this code right after the <body> tag on every page of your site. -->
-    <script type="text/javascript">
-      var _kiq = _kiq || [];
-      (function(){
-        setTimeout(function(){
-        var d = document, f = d.getElementsByTagName('script')[0], s = d.createElement('script'); s.type = 'text/javascript';
-        s.async = true; s.src = '//s3.amazonaws.com/ki.js/60130/dxx.js'; f.parentNode.insertBefore(s, f);
-        }, 1);
-      })();
-    </script>
 
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -79,35 +68,6 @@
     <%= render 'shared/navbar' %>
 
     <%= yield %>
-    <!-- Modal Sign Up-->
-    <div class="modal fade" id="mySignUpModal" tabindex="-1" role="dialog" aria-labelledby="mySignUpModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title text-center">Inscrivez-vous pour continuer</h4>
-          </div>
-          <div class="modal-body">
-            <%= render "devise/shared/sign_up_form" %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal Sign ip-->
-    <div class="modal fade" id="mySignInModal" tabindex="-1" role="dialog" aria-labelledby="mySignInModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title text-center">Connectez-vous pour continuer</h4>
-          </div>
-          <div class="modal-body">
-            <%= render "devise/shared/sign_in_form" %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="fb-root"></div>
     <%= yield(:before_js) %>
     <%= javascript_include_tag 'application' %>
     <%= yield (:map_js) %>

@@ -1,3 +1,9 @@
+<%= content_for :title do %>
+  <%="#{@destination.name} : quels itinéraires, que faire, que voir, combien de temps"%>
+<% end %>
+<%= content_for (:description) do %>
+  <%= "#{@destination.name} : toutes les informations dont vous avez besoin pour votre organiser votre voyage" %>
+<% end %>
 <body style="position=relative;" data-spy="scroll" data-target="#navbar-menu">
   <!-- Menu bar -->
   <div id="navbar-menu" role="navigation" class="hidden-xs">

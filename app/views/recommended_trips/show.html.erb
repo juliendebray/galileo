@@ -1,3 +1,9 @@
+<%= content_for :title do %>
+  <%= "#{@recommended_trip.title}" %>
+<% end %>
+<%= content_for (:description) do %>
+  <%= @recommended_trip.description %>
+<% end %>
 <div class="under-navbar">
   <div class="container-fluid">
     <h1 class="text-center medium-article-title">

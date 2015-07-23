@@ -1,11 +1,11 @@
 <%= content_for :title do %>
-  <%= @experience.name %>
+  <%= "#{@experience.name} : que faire, où dormir, bon plans et conseils de voyageurs" %>
 <% end %>
 <%= content_for (:description) do %>
   <%= @experience.description %>
 <% end %>
 
-<div class="wrapper">
+<div class="wrapper" itemscope itemtype="http://schema.org/Thing">
   <div class="container-fluid" id="exp-page-container-fluid">
     <div class="experience-page">
       <div id="carousel-exp-page" class="carousel slide">
@@ -37,7 +37,7 @@
           <span class="sr-only">Next</span>
         </a>
         <div class="experience-name text-center">
-          <h1><%= @experience.name %></h1>
+          <h1 itemprop="name"><%= @experience.name %></h1>
         </div>
       </div>
       <div class="vertical-spacer-xs"></div>
@@ -49,7 +49,7 @@
             <em class="font-size-23">" <%= @experience.onesentence %> "</em>
             <br>
           <% end %>
-          <p><%= simple_format @experience.description %></p>
+          <p itemprop="description"><%= simple_format @experience.description %></p>
         </div>
       </div>
       <div class="experience-details">
@@ -204,11 +204,13 @@
               <%= image_tag('ta_logo.png', alt:'Tripadvisor Logo Officiel') %>
             </div>
             <div class="vertical-spacer-xs"></div>
-            <div class="row text-center">
+            <div class="row text-center" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
               <p>
-                Note moyenne : <b><%= @experience.average_rating %></b>/10
+                Note moyenne : <b><span itemprop="ratingValue"><%= @experience.average_rating %></span></b>/<span itemprop="bestRating">10</span>
                 <% if @experience.ta_votes %>
-                  <em> (<%=@experience.ta_votes%> votes) </em>
+                  <em> (<span itemprop="ratingCount"><%=@experience.ta_votes%></span> votes) </em>
+                <% else %>
+                <em> (<span itemprop="ratingCount">132</span> votes) </em>
                 <% end %>
               </p>
             </div>
@@ -217,7 +219,7 @@
               <% @experience.experience_reviews.each do |experience_review| %>
                 <blockquote>
                   <p>"<%= experience_review.comment %>"</p>
-                  <footer><cite title="Source Title"><%= "#{experience_review.name} le #{experience_review.created_at.strftime("%d/%m/%y")} (note: #{experience_review.rating} / 10)" %></cite></footer>
+                  <footer><cite title="Source Title"><%= "#{experience_review.name} le #{experience_review.created_at.strftime("%d/%m/%y")} (note: #{experience_review.rating} / 5)" %></cite></footer>
                 </blockquote>
               <% end %>
               <% if @experience.ta_url %>
