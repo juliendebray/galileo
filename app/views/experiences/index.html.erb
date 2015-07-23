@@ -1,5 +1,5 @@
 <%= content_for :title do %>
-  <%= "Trouvez de l'inspiration en explorant notre selection des plus beux endroits sur Terre" %>
+  <%= "Soyez inspiration en explorant notre sélection des plus beux endroits sur Terre" %>
 <% end %>
 <%= content_for (:description) do %>
   <%= "Explorez le monde et toutes ses richesse, laissez vous réver ou préparer votre prochain voyage ;)" %>
@@ -12,7 +12,7 @@
           <h1><%= t('.title') %></h1>
         </div>
       </div>
-      <% Experience.where(published:true, landing_point:false).each do |experience| %>
+      <% for experience in @experiences %>
         <div class="col-xs-12 col-sm-6 col-md-4">
           <div class="experience-box">
             <%= link_to experience_path(experience.id), target: "_blank" do %>
@@ -33,5 +33,9 @@
     </div>
   </div>
   <div class="vertical-spacer-xs"></div>
-</body>
+  <div id="pagination" class="text-center">
+    <%= paginate @experiences %>
+  </div>
+  <div class="vertical-spacer-xs"></div>
 <%= render partial: 'shared/footer' %>
+</body>

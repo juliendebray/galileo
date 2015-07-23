@@ -112,6 +112,8 @@ gem 'quiet_assets', group: :development
 # Detect browser-user agent
 gem 'browser'
 
+gem 'kaminari'
+
 
 
 

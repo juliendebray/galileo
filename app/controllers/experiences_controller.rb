@@ -37,7 +37,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
-    @experiences = Experience.all
+    @experiences = Experience.where(landing_point: false, published: true).order('name').page(params[:id]).per(24)
   end
 
   # GET /experiences/1/edit
