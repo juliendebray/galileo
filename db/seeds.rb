@@ -9,11 +9,11 @@
 # !!!!!!!!_______________W_A_R_N_I_N_G____________________________!!!!!!!!
 # LOCAL USE ONLY -> Generate pictures after import_from_heroku
 # Never push this block uncommented to github or heroku
-ExperiencePicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |exp_pic|
-  puts "#{exp_pic.experience.name} started to update..."
-  exp_pic.update(picture: exp_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
-  puts "#{exp_pic.experience.name}  completed!"
-end
+# ExperiencePicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |exp_pic|
+#   puts "#{exp_pic.experience.name} started to update..."
+#   exp_pic.update(picture: exp_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
+#   puts "#{exp_pic.experience.name}  completed!"
+# end
 # DestinationPicture.where('updated_at < ?', DateTime.new(2015,7,16)).each do |dest_pic|
 #   dest_pic.update(picture: dest_pic.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/"))
 # end
@@ -21,6 +21,102 @@ end
 #   reco_trip.update(picture: reco_trip.picture.url.gsub("galileo", "philae").gsub("\/development\/", "\/production\/")) unless reco_trip.picture.url.include?('missing')
 # end
 # !!!!!!!!_________________________________________________________!!!!!!!!
+
+
+# Replace link for launching experience detail modal
+RecommendedTrip.where.not(step_1: nil).each do |rt|
+  s = rt.step_1
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_1: s)
+  end
+  s = rt.step_2
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_2: s)
+  end
+  s = rt.step_3
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_3: s)
+  end
+  s = rt.step_4
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_4: s)
+  end
+  s = rt.step_5
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_5: s)
+  end
+  s = rt.step_6
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_6: s)
+  end
+  s = rt.step_1
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_1: s)
+  end
+  s = rt.step_7
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_7: s)
+  end
+  s = rt.step_9
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_9: s)
+  end
+  s = rt.step_10
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_10: s)
+  end
+  s = rt.step_11
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_11: s)
+  end
+  s = rt.step_12
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_12: s)
+  end
+  s = rt.step_13
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_13: s)
+  end
+  s = rt.step_14
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_14: s)
+  end
+  s = rt.step_15
+  if s && s != "" && s =~ /<a data-remote=.true. href=.\/experiences\/.+\/detail.>/
+    s = s.gsub(/data-remote=.true./, "target='_blank'")
+    s = s.gsub("/detail", "/")
+    rt.update(step_15: s)
+  end
+end
+
 
 
 
