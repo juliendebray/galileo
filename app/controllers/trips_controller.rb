@@ -1,18 +1,18 @@
 class TripsController < ApplicationController
   before_action :authenticate_guest!, only: [:show_guest_user]
-  before_action :authenticate_user!, except: [:update_order, :create, :start, :show_guest_user, :notification_for_sharing_email, :providers]
+  before_action :authenticate_user!, except: [:update_order, :start, :inspiration, :explore_destination, :create, :show_guest_user, :notification_for_sharing_email, :providers]
   before_action :set_trip, only: [:start, :update, :show, :show_guest_user, :share_trip_email, :notification_for_sharing_email, :providers, :summarize, :update_order, :send_my_trip_email, :selection_display, :explore_map, :explore_destination]
   respond_to :js, only: [:selection_display, :share_trip_email]
 
   def create
-    @trip = current_user.trips.new(trip_params)
-    @trip.title = @trip.query
-    @trip.save
+    @trip = Trip.new(trip_params)
     @destination = Destination.find_by(country_code: @trip.country_code)
-    if @destination
-      redirect_to explore_destination_trip_path(@trip)
+    if @destination && @trip.country_code
+      redirect_to destination_path(@destination)
     else
-      redirect_to start_trip_path(@trip)
+      @trip.title = @trip.query
+      @trip.save
+      redirect_to inspiration_trip_path(@trip)
     end
   end
 
@@ -24,7 +24,7 @@ class TripsController < ApplicationController
 
   def explore_destination
     experiences = Experience.where(published: true, country_code: @trip.country_code)
-    Destination.where(country_code: @trip.country_code).any? ? @destination = Destination.where(country_code: @trip.country_code).first : @destination = nil
+    @destination = Destination.find_by(country_code: @trip.country_code)
     @trip.trip_experiences.where.not(recommended_trip_id: nil).any? ? @recommended_trip_id = @trip.trip_experiences.where.not(recommended_trip_id: nil).first.recommended_trip_id : @recommended_trip_id = nil
     @markers = build_markers(experiences.sort_by{|e| e.average_rating}.reverse, @trip, false)
   end
