@@ -43,31 +43,31 @@
 
       <div class="filters-block text-center">
         <div>
-          <a id="must" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+          <a id="must" href="#" class="btn no-border btn-default category-btn btn-block" role="button" onclick="ga('send', 'event', 'Filter clicked', 'Incontournable', '#{@trip.query}');">
             <i class="fa fa-star"></i>
             <span class="hidden-xs">Incontournables</span>
           </a>
         </div>
         <div>
-          <a id="otbt" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+          <a id="otbt" href="#" class="btn no-border btn-default category-btn btn-block" role="button" onclick="ga('send', 'event', 'Filter clicked', 'Hors des sentiers battus', '#{@trip.query}');">
             <i class="fa fa-compass"></i>
             <span class="hidden-xs">Hors des sentiers battus</span>
           </a>
         </div>
         <div>
-          <a id="relax" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+          <a id="relax" href="#" class="btn no-border btn-default category-btn btn-block" role="button" onclick="ga('send', 'event', 'Filter clicked', 'Relax', '#{@trip.query}');">
             <i class="fa fa-glass"></i>
             <span class="hidden-xs">Détente</span>
           </a>
         </div>
         <div>
-          <a id="culture" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+          <a id="culture" href="#" class="btn no-border btn-default category-btn btn-block" role="button" onclick="ga('send', 'event', 'Filter clicked', 'Culture', '#{@trip.query}');">
             <i class="fa fa-university"></i>
             <span class="hidden-xs">Culture</span>
           </a>
         </div>
         <div>
-          <a id="sport" href="#" class="btn no-border btn-default category-btn btn-block" role="button">
+          <a id="sport" href="#" class="btn no-border btn-default category-btn btn-block" role="button" onclick="ga('send', 'event', 'Filter clicked', 'Sport', '#{@trip.query}');">
             <i class="fa fa-bicycle"></i>
             <span class="hidden-xs">Sport</span>
           </a>

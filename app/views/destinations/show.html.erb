@@ -9,22 +9,22 @@
   <div id="navbar-menu" role="navigation" class="hidden-xs">
     <ul class="nav nav-pills nav-justified" role="tablist">
       <li>
-        <a href="#summary" onclick="ga('send', 'event', 'User', 'En bref Menu', 'User clicked on en bref from destination navbar menu');">En bref</a>
+        <a href="#summary" onclick="ga('send', 'event', 'Menu from destination show links', 'En bref Menu', 'User clicked on en bref from destination navbar menu');">En bref</a>
       </li>
       <li>
-        <a href="#overview" onclick="ga('send', 'event', 'User', 'Must know Menu', 'User clicked on must know from destination navbar menu');">Infos pratiques</a>
+        <a href="#overview" onclick="ga('send', 'event', 'Menu from destination show links', 'Must know Menu', 'User clicked on must know from destination navbar menu');">Infos pratiques</a>
       </li>
       <li>
-        <a href="#must-see" onclick="ga('send', 'event', 'User', 'Attractions Menu', 'User clicked on attractions from destination navbar menu');">Les incontournables</a>
+        <a href="#must-see" onclick="ga('send', 'event', 'Menu from destination show links', 'Attractions Menu', 'User clicked on attractions from destination navbar menu');">Les incontournables</a>
       </li>
       <li>
-        <a href="#recommended-trip" onclick="ga('send', 'event', 'User', 'Itinerary Menu', 'User clicked on itinerary from destination navbar menu');">Les itinéraires</a>
+        <a href="#recommended-trip" onclick="ga('send', 'event', 'Menu from destination show links', 'Itinerary Menu', 'User clicked on itinerary from destination navbar menu');">Les itinéraires</a>
       </li>
       <li>
-        <a href="#accomodations" onclick="ga('send', 'event', 'User', 'My Trip Menu', 'User clicked on my trip from destination navbar menu');">Logements</a>
+        <a href="#accomodations" onclick="ga('send', 'event', 'Menu from destination show links', 'My Trip Menu', 'User clicked on my trip from destination navbar menu');">Logements</a>
       </li>
       <li>
-        <a href="#my-trip" onclick="ga('send', 'event', 'User', 'My Trip Menu', 'User clicked on my trip from destination navbar menu');">Plus de destinations</a>
+        <a href="#my-trip" onclick="ga('send', 'event', 'Menu from destination show links', 'My Trip Menu', 'User clicked on my trip from destination navbar menu');">Plus de destinations</a>
       </li>
     </ul>
   </div>
@@ -195,7 +195,7 @@
           <ol>
             <% Experience.where(destination: @destination, published:true, must_see:true, landing_point:false).order(average_rating: :desc) {|experience| experience.average_rating }.each do |experience| %>
               <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" do %>
+                <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'Experience details', '#{experience.name}', 'User clicks on experience detail from destination show view');" do %>
                   <div class="experience-name">
                     <li><p><%= experience.name %></p></li>
                   </div>
@@ -203,7 +203,7 @@
                 <div class="row text-center">
                   <div class="col-xs-12 col-sm-6">
                     <div class="experience-big-box">
-                      <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" do %>
+                      <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'Experience details', '#{experience.name}', 'User clicks on experience detail from destination show view');" do %>
                         <div class="experience-picture text-center">
                           <% if experience.experience_pictures.first %>
                             <%= image_tag experience.experience_pictures.first.picture.url(:medium), class: "img-responsive" %>
@@ -276,7 +276,7 @@
                         <%= simple_format truncate(experience.description, length: 200, separator: ' ') %>
                       </div>
                       <div class="experience-know-more">
-                        <p><%= link_to "En savoir plus", experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" %></p>
+                        <p><%= link_to "En savoir plus", experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'Experience details', '#{experience.name}', 'User clicks on experience detail from destination show view');" %></p>
                       </div>
                     </div>
                   </div>

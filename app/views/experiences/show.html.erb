@@ -235,7 +235,7 @@
                 </blockquote>
               <% end %>
               <% if @experience.ta_url %>
-                <%= link_to @experience.ta_url, target:'_blank' do %>
+                <%= link_to @experience.ta_url, target:'_blank', onclick:"ga('send', 'event', 'Reviews link', '#{experience.name}', 'Click on more reviews link from experience show');" do %>
                   <h5 class="text-center">Voir plus de commentaires </h5>
                 <% end %>
               <% end %>

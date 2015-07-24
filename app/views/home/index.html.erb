@@ -23,7 +23,7 @@
             <%= f.hidden_field(:vp_sw_lng, class: 'trip_params') %>
             <%= f.hidden_field(:country_code, class: 'trip_params') %>
             <%= f.search_field(:query, placeholder: t('.searchplaceholder'), required: true ) %>
-            <%= f.submit( 'Rechercher', class: 'btn btn-info btn-sm', onclick:"ga('send', 'event', 'User', 'Search Button', 'Click on search button from hp');") %>
+            <%= f.submit( 'Rechercher', class: 'btn btn-info btn-sm', onclick:"var query = $('#trip_query').val(); ga('send', 'event', 'Search trip', query, 'from homepage');") %>
           </div>
         <% end %>
       </div>
@@ -141,15 +141,4 @@
 </div>
 <%= content_for(:before_js) do %>
   <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;key=AIzaSyCf77HD5LQkLbAcZWkBXKj-DLkXQJ9vHEc" %>
-<% end %>
-<%= content_for(:after_js) do %>
-  <% if flash[:notice] && user_signed_in? %>
-  <% if session[:from]  %>
-    <% current_user.update(from_campaign: session[:from]) if current_user.from_campaign.nil?   %>
-  <% end %>
-    <script>
-      // Google analytics event
-      ga('send', 'event', 'User', 'Sign up / Sign in', 'Flash notice message detected');
-    </script>
-  <% end %>
 <% end %>

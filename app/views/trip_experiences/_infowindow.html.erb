@@ -1,5 +1,5 @@
 <div id="experience-infowindow">
-  <%= link_to '', experience_path(experience), target: '_blank', id:"link-to-detail", onclick:"ga('send', 'event', 'User', 'Experience Detail', 'User clicked on experience infowindow from picture');" %>
+  <%= link_to '', experience_path(experience), target: '_blank', id:"link-to-detail", onclick:"ga('send', 'event', 'Experience detail inspiration', 'from infowindow picture', '#{experience.name}');" %>
   <div id="owl-experiences" class="owl-carousel small text-center">
     <% experience.experience_pictures.sort_by {|pic| pic.id }.each do |pic| %>
     <div class="item">
@@ -14,13 +14,13 @@
     <span class="out-of">/</span>
     <span class="best">10</span>
     <span class="pull-right">
-      <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'Guest', 'Experience Detail', 'Guest clicked on experience infowindow from title');" do %>
+      <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'Experience detail from inspiration page', 'from infowindow info circle', '#{experience.name}');" do %>
       <i class="fa fa-info-circle font-size-23 white"></i>
       <% end %>
     </span>
   </div>
   <div class="infobox-content text-center">
-    <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail', 'User clicked on experience infowindow from title');" do %>
+    <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'Experience detail from inspiration page', 'from infowindow experience name', '#{experience.name}');" do %>
     <%=experience.name%>
     <% end %>
   </div>
