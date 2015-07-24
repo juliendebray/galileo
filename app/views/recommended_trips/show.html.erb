@@ -121,7 +121,7 @@
 
       <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="experience-big-box">
-          <%= link_to experience_path(rte.experience.id), target: "_blank", onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{rte.experience.name} from explore_destination');" do %>
+          <%= link_to experience_path(rte.experience), target: "_blank", onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{rte.experience.name} from explore_destination');" do %>
             <div class="experience-picture text-center">
               <% if rte.experience.experience_pictures.first %>
                 <%= image_tag rte.experience.experience_pictures.first.picture.url(:medium), class: "img-responsive" %>

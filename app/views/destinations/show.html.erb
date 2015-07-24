@@ -195,7 +195,7 @@
           <ol>
             <% Experience.where(destination: @destination, published:true, must_see:true, landing_point:false).order(average_rating: :desc) {|experience| experience.average_rating }.each do |experience| %>
               <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                <%= link_to experience_path(experience.id), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" do %>
+                <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" do %>
                   <div class="experience-name">
                     <li><p><%= experience.name %></p></li>
                   </div>
@@ -203,7 +203,7 @@
                 <div class="row text-center">
                   <div class="col-xs-12 col-sm-6">
                     <div class="experience-big-box">
-                      <%= link_to experience_path(experience.id), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" do %>
+                      <%= link_to experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" do %>
                         <div class="experience-picture text-center">
                           <% if experience.experience_pictures.first %>
                             <%= image_tag experience.experience_pictures.first.picture.url(:medium), class: "img-responsive" %>
@@ -276,7 +276,7 @@
                         <%= simple_format truncate(experience.description, length: 200, separator: ' ') %>
                       </div>
                       <div class="experience-know-more">
-                        <p><%= link_to "En savoir plus", experience_path(experience.id), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" %></p>
+                        <p><%= link_to "En savoir plus", experience_path(experience), target: '_blank', onclick:"ga('send', 'event', 'User', 'Experience Detail from Que voir - incontournables', 'User clicks on experience #{experience.name} from explore_destination');" %></p>
                       </div>
                     </div>
                   </div>

@@ -15,7 +15,7 @@
       <% for experience in @experiences %>
         <div class="col-xs-12 col-sm-6 col-md-4">
           <div class="experience-box">
-            <%= link_to experience_path(experience.id), target: "_blank" do %>
+            <%= link_to experience_path(experience), target: "_blank" do %>
               <div class="experience-picture text-center">
                 <% if experience.experience_pictures.first %>
                   <%= image_tag experience.experience_pictures.first.picture.url(:medium), class: "img-responsive" %>

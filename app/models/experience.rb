@@ -29,6 +29,16 @@ class Experience < ActiveRecord::Base
 
   after_validation :update_published_date, if: :published_changed?
 
+
+
+  def slug
+    I18n.transliterate(self.name.downcase.gsub("'","-").gsub(", ","-").gsub(" ", "-"))
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
+
   private
   def country_code_needed?
     self.country_code.nil?

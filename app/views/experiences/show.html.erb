@@ -295,7 +295,7 @@
        <div class="row text-center">
           <br>
           <% if @experience.destination %>
-            <%= link_to "Voir la destination - #{@experience.destination.name.capitalize}", destination_path(@experience.destination.id), {class: "btn btn-info"} %>
+            <%= link_to "Voir la destination - #{@experience.destination.name.capitalize}", destination_path(@experience.destination), {class: "btn btn-info"} %>
             <% end %>
         </div>
       <div class="vertical-spacer-sm"></div>

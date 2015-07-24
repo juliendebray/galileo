@@ -12,4 +12,13 @@ class RecommendedTrip < ActiveRecord::Base
 
   validates_attachment_content_type :picture,
     content_type: /\Aimage\/.*\z/
+
+
+  def slug
+    I18n.transliterate(self.title.downcase.gsub("'","-").gsub(", ","-").gsub(" ", "-"))
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
 end

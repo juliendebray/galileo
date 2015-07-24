@@ -19,6 +19,16 @@ class Trip < ActiveRecord::Base
   before_save :geocode_trip, if: :geocoding_needed?
   before_save :generate_token, if: :user_id_changed?
 
+
+  def slug
+    I18n.transliterate(self.title.downcase.gsub("'","-").gsub(", ","-").gsub(" ", "-"))
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
+
+
   def generate_url_with_token
     ROOT_URL + "/trips/#{self.id}/#{self.token}"
   end
