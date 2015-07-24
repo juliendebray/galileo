@@ -289,7 +289,7 @@ DEPENDENCIES
   gmaps4rails
   jquery-rails
   jquery-ui-rails
-  kaminari
+  kaminari (~> 0.16.1)
   koala
   letter_opener
   metamagic
