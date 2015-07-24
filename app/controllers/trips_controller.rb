@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
   before_action :authenticate_guest!, only: [:show_guest_user]
-  before_action :authenticate_user!, except: [:update_order, :start, :inspiration, :explore_destination, :create, :show_guest_user, :notification_for_sharing_email, :providers]
+  before_action :authenticate_user!, except: [:update_order, :search_results, :search_results_with_block, :start, :inspiration, :explore_destination, :create, :show_guest_user, :notification_for_sharing_email, :providers]
   before_action :set_trip, only: [:start, :update, :show, :show_guest_user, :share_trip_email, :notification_for_sharing_email, :providers, :summarize, :update_order, :send_my_trip_email, :selection_display, :explore_map, :explore_destination]
   respond_to :js, only: [:selection_display, :share_trip_email]
 

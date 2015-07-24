@@ -95,57 +95,37 @@
 <% content_for(:after_js) do %>
   <script>
     $(document).on('ready', function() {
-        var mapOptions = {
-          center: new google.maps.LatLng(<%= @trip.latitude %>, <%= @trip.longitude %>),
-          zoom: 6,
-          disableDoubleClickZoom: false,
-          scaleControl: true,
-          disableDefaultUI: true,
-          zoomControl: true,
-          zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.SMALL
-          }
-        };
-        var bounds = '';
-        <% if @trip.viewport_set? %>
-          bounds = new google.maps.LatLngBounds( new google.maps.LatLng(<%= @trip.vp_sw_lat %>,<%= @trip.vp_sw_lng %>), new google.maps.LatLng(<%= @trip.vp_ne_lat %>,<%= @trip.vp_ne_lng %>))
-        <% end %>
-        handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5, clusterer: undefined } });
-        handler.buildMap({ provider: mapOptions, internal: { id: 'map' } }, function(){
-          var map = handler.getMap();
-          if (bounds != '') {
-            map.fitBounds(bounds);
-          }
-          markers = handler.addMarkers(<%= raw @markers.to_json %>);
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-          setExperienceInfowindowForGlobalMap(<%= raw @markers.to_json %>);
-          setExperienceBlock(<%= raw @markers.to_json %>);
-          initializeFilterButtons(<%= @trip.id %>, true);
-
-
-
-          // removeFiltersActiveClass();
-          // setMarkersAndKeepListening(map, <%= @trip.id %>);
-          // displayMarkersAccordingToUserChoicesInsideSelection('top-from-explorizers', trip_id, map);
-          // KEEP LISTENING AND DISPLAY MARKERS ACCORDING TO USERS CHOICES
-          // listenToUserChoices(trip_id, map);
-          initializeMapSearchBar('pac-input');
-          // google.maps.event.addListener(map, "click", function(e) {
-          //   if (ibOpened) {
-          //     ib.close();
-          //     ibOpened = false;
-          //   }
-          // });
-          // closeInfoboxWhenDragging(map);
-          $('.overlay').css('display','none');
-        });
-
-
-        // buildMapForUser(userMapOptions, <%= @trip.id %>, bounds);
-        // makeTableRowlinkActionnable();
-        // placeHelpButton();
-        // initializeFilterButtons(<%= @trip.id %>, true);
+      var mapOptions = {
+        center: new google.maps.LatLng(<%= @trip.latitude %>, <%= @trip.longitude %>),
+        zoom: 6,
+        disableDoubleClickZoom: false,
+        scaleControl: true,
+        disableDefaultUI: true,
+        zoomControl: true,
+        zoomControlOptions: {
+          style: google.maps.ZoomControlStyle.SMALL
+        }
+      };
+      var bounds = '';
+      <% if @trip.viewport_set? %>
+        bounds = new google.maps.LatLngBounds( new google.maps.LatLng(<%= @trip.vp_sw_lat %>,<%= @trip.vp_sw_lng %>), new google.maps.LatLng(<%= @trip.vp_ne_lat %>,<%= @trip.vp_ne_lng %>))
+      <% end %>
+      handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5, clusterer: undefined } });
+      handler.buildMap({ provider: mapOptions, internal: { id: 'map' } }, function(){
+        var map = handler.getMap();
+        if (bounds != '') {
+          map.fitBounds(bounds);
+        }
+        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        setExperienceInfowindowForGlobalMap(<%= raw @markers.to_json %>);
+        setExperienceBlock(<%= raw @markers.to_json %>);
+        setAnimationOnMarkers();
+        initializeFilterButtons(<%= @trip.id %>, true);
+        initializeMapSearchBar('pac-input');
+        $('.overlay').css('display','none');
+      });
     });
   </script>
 <% end %>
